@@ -1,56 +1,39 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Stack;
 
 /**
- * Processes words in a sentence.
+ * 檢查括號是否正確配對。
  */
-public class SentenceProcessor {
+public class ParenthesisMatcher {
 
     /**
-     * Removes duplicate words, keeping only the first occurrence.
+     * 判斷字串中的括號是否有效。
      *
-     * @param sentence the sentence to be processed
-     * @return the sentence with duplicate words removed
+     * @param s 要檢查的括號字串
+     * @return 配對正確回傳 true，否則回傳 false
      */
-    public String removeDuplicatedWords(String sentence) {
-        String[] words = sentence.trim().split("\\s+");
-        Set<String> uniqueWords = new LinkedHashSet<>();
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
 
-        for (String word : words) {
-            uniqueWords.add(word);
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+                char open = stack.pop();
+
+                if (ch == ')' && open != '(') {
+                    return false;
+                } else if (ch == '}' && open != '{') {
+                    return false;
+                } else if (ch == ']' && open != '[') {
+                    return false;
+                }
+            }
         }
 
-        return String.join(" ", uniqueWords);
-    }
-
-    /**
-     * 將句子中所有符合的單字替換成新的單字。
-     *
-     * @param target 要被替換的單字
-     * @param replacement 替換後的單字
-     * @param sentence 要處理的句子
-     * @return 完成替換後的句子
-     */
-    public String replaceWord(
-            String target,
-            String replacement,
-            String sentence) {
-
-        String[] words = sentence.trim().split("\\s+");
-        StringBuilder result = new StringBuilder();
-
-        for (String word : words) {
-            if (word.equals(target)) {
-                word = replacement;
-            }
-
-            if (result.length() > 0) {
-                result.append(" ");
-            }
-
-            result.append(word);
-        }
-
-        return result.toString();
+        return stack.isEmpty();
     }
 }
