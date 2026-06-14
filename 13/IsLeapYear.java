@@ -1,5 +1,6 @@
 /**
- * Determines whether a given year is a leap year.
+ * Determines whether a given year is a leap year
+ * according to the Gregorian calendar.
  */
 public class IsLeapYear {
 
@@ -7,7 +8,8 @@ public class IsLeapYear {
      * Determines whether the specified year is a leap year.
      *
      * @param year the year to be checked
-     * @return true if the year is a leap year; otherwise, false
+     * @return true if the given year is a leap year;
+     *         false otherwise
      */
     public boolean determine(int year) {
         return year % 400 == 0
