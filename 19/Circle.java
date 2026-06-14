@@ -3,11 +3,6 @@
  */
 public class Circle extends Shape {
 
-    /**
-     * 建立指定直徑的圓形。
-     *
-     * @param length 直徑
-     */
     public Circle(double length) {
         super(length);
     }
@@ -19,12 +14,14 @@ public class Circle extends Shape {
 
     @Override
     public double getArea() {
-        double radius = length / 2;
-        return Math.PI * radius * radius;
+        double radius = length / 2.0;
+        double area = Math.PI * radius * radius;
+        return Math.round(area * 100.0) / 100.0;
     }
 
     @Override
     public double getPerimeter() {
-        return Math.PI * length;
+        double perimeter = Math.PI * length;
+        return Math.round(perimeter * 100.0) / 100.0;
     }
 }
